@@ -1,0 +1,55 @@
+// Version I
+void quickSort(int arr[], int left, int right) {
+      int i = left, j = right;
+      int tmp;
+      int pivot = arr[(left + right) / 2];
+ 
+      /* partition */
+      while (i <= j) {
+            while (arr[i] < pivot)
+                  i++;
+            while (arr[j] > pivot)
+                  j--;
+            if (i <= j) {
+                  swap(arr[i], arr[j]);
+                  i++;
+                  j--;
+            }
+      };
+ 
+      /* recursion */
+      if (left < j)
+            quickSort(arr, left, j);
+      if (i < right)
+            quickSort(arr, i, right);
+}
+
+
+// Version II
+void quickSort(vector<int> &v, int left, int right) {
+	int index = partition(v, left, right);
+	if (left < index - 1) {	// sort left half
+		quickSort(v, left, index - 1);
+	}
+	if (index < right) {	// sort right half
+		quickSort(v, index, right);
+	}
+}
+
+int partition(vector<int> &v, int left, int right) {
+	int pivot = v[(left + right) / 2];	// pick pivot point
+	while (left <= right) {
+		// find elements of left that should be on right
+		while (v[left] < pivot) ++left;
+		// find elements of right that should be on left
+		while (v[right] > pivot) --right;
+		
+		// swap elements, and move left and right indices
+		if (left <= right) {
+			swap(v[left], v[right]	// swap elements
+			++left;
+			++right;
+		}
+	}
+	return left;
+}
