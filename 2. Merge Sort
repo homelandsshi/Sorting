@@ -60,64 +60,47 @@ vector<int> merge(const vector<int>& left, const vector<int>& right)
 }
 
 // Version II
-void merge(int a[], const int low, const int mid, const int high)
+void merge(int*arr, int p, int q, int r)
 {
-	// Variables declaration. 
-	int * b = new int[high+1-low];
-	int h,i,j,k;
-	h=low;
-	i=0;
-	j=mid+1;
-	// Merges the two array's into b[] until the first one is finish
-	while((h<=mid)&&(j<=high))
-	{
-		if(a[h]<=a[j])
-		{
-			b[i]=a[h];
-			h++;
-		}
-		else
-		{
-			b[i]=a[j];
-			j++;
-		}
-		i++;
-	}
-	// Completes the array filling in it the missing values
-	if(h>mid)
-	{
-		for(k=j;k<=high;k++)
-		{
-			b[i]=a[k];
-			i++;
-		}
-	}
-	else
-	{
-		for(k=h;k<=mid;k++)
-		{
-			b[i]=a[k];
-			i++;
-		}
-	}
-	// Prints into the original array
-	for(k=0;k<=high-low;k++) 
-	{
-		a[k+low]=b[k];
-	}
-	delete[] b;
+    int n1 = q - p + 1;
+    int n2 = r - q;
+ 
+    int* L = new int[n1];
+    int* R = new int[n2];
+ 
+    for(int i = 0; i < n1; i++)
+        L[i] = arr[p + i];
+    for(int j = 0; j < n2; j++)
+        R[j] = arr[q + j + 1];
+ 
+    int i = j = 0; //新数组中左右两部分索引
+    int k = p;     //原数组中索引
+ 
+    while(i < n1 && j < n2)
+    {
+        if(L[i] <= R[j])
+            arr[k++] = L[i++];
+        else
+            arr[k++] = R[j++];
+    }
+ 
+    for(; i < n1; i++)
+        arr[k++] = L[i];
+    for(; j < n2; j++)
+        arr[k++] = R[j];
 }
  
-void merge_sort(int a[], const int low, const int high)		// Recursive sort ...
+void mergesort(int* arr, int p, int r)
 {
-	int mid;
-	if(low<high)
-	{
-		mid=(low+high)/2;
-		merge_sort(a, low,mid);
-		merge_sort(a, mid+1,high);
-		merge(a, low,mid,high);
-	}
+    int q;
+    if(p < r)
+    {
+        q = (p + r) / 2;
+        mergesort(arr, p, q);
+        mergesort(arr, q + 1, r);
+        merge(arr, p, q, r);
+    }
 }
+
 
 
