@@ -73,8 +73,8 @@ void merge(int*arr, int p, int q, int r)
     for(int j = 0; j < n2; j++)
         R[j] = arr[q + j + 1];
  
-    int i = j = 0; //新数组中左右两部分索引
-    int k = p;     //原数组中索引
+    int i = j = 0; // new array indices
+    int k = p;     // old array index
  
     while(i < n1 && j < n2)
     {
