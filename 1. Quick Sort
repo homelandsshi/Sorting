@@ -46,7 +46,7 @@ int partition(vector<int> &v, int left, int right) {
 		
 		// swap elements, and move left and right indices
 		if (left <= right) {
-			swap(v[left], v[right]	// swap elements
+			swap(v[left], v[right])	// swap elements
 			++left;
 			--right;
 		}
